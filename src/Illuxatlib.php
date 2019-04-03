@@ -111,5 +111,4 @@ class Illuxatlib
          'response' => $output
         ];
     }
-
 }
