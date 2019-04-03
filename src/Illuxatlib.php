@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of Illuxat/SLOom.
  *
@@ -34,27 +34,27 @@ class Illuxatlib
      *
      * @var string $_illuxat_dom
      */
-    private static $_illuxat_dom = 'https://api.illuxat.com/';
+    private static $illuxatdom = 'https://api.illuxat.com/';
 
     /**
      * Get the informations of a power
-     * 
+     *
      * @param string $powerName Name of a xat power
-     * 
+     *
      * @return array
      */
-    public static function powerInfo(string $powerName): array 
+    public static function powerInfo(string $powerName): array
     {
         if (empty($powerName) || strlen($powerName) == 0) {
             throw new \Exception('You must specify a power');
         }
 
-        $content = self::_getContent(
-            self::$_illuxat_dom . 'powerApi?power=' . $powerName
+        $content = self::getContent(
+            self::$illuxatdom . 'powerApi?power=' . $powerName
         );
 
         if (empty($content['response'])) {
-            throw new \Exception("Error Processing Request");     
+            throw new \Exception("Error Processing Request");
         }
 
         $content = json_decode($content['response'], true);
@@ -71,12 +71,12 @@ class Illuxatlib
      *
      * @return mixed
      */
-    public static function getLatest(): ?array 
+    public static function getLatest(): ?array
     {
-        $content = self::_getContent(self::$_illuxat_dom . 'latestpower');
+        $content = self::getContent(self::$illuxatdom . 'latestpower');
 
         if (empty($content['response'])) {
-            throw new \Exception("Error Processing Request");     
+            throw new \Exception("Error Processing Request");
         }
 
         $content = json_decode($content['response'], true);
@@ -86,30 +86,30 @@ class Illuxatlib
         }
 
         return $content;
-
     }
 
     /**
      *  Get content of a URL
-     * 
+     *
      * @param string $url Url to fetch content
-     * 
+     *
      * @return mixed
      */
-    private function _getContent(string $url): ?array
+    private function getContent(string $url): ?array
     {
         if (empty($url) || strlen($url) == 0) {
             throw new \Exception('You must specify a url');
         }
 
         $curlInit = curl_init();
-        curl_setopt($curlInit, CURLOPT_URL, $url); 
-        curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, 1); 
-        $output = curl_exec($curlInit); 
+        curl_setopt($curlInit, CURLOPT_URL, $url);
+        curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($curlInit);
         curl_close($curlInit);
 
         return [
          'response' => $output
         ];
     }
+    
 }
