@@ -18,6 +18,32 @@ Make sure to have composer installed!
 **Second solution:** 
 
 Or If you feel too lazy to run it through composer, you can directly clone this repository and run ``composer install``.
+## How to use?
+That's simple, even a newbie would understand! 😄 
+
+Here is an example of use:
+
+```
+require_once 'vendor/autoload.php'; 
+
+use Illuxat\Illuxatlib;
+
+$latest = Illuxatlib::getLatest();
+
+print_r($latest);
+```
+
+Basically, we do require autoload and then we initialize the Illuxatlib class from the Illuxat namespace. On this example, i'm calling the ```getLatest()``` function to return the information of the latest xat power.
+
+The output would be this one:
+
+<img src="https://i.imgur.com/kG2HVY6.png" alt="screenshot">
+
+## Functions list
+On this part, you can find the list of available functions. In the future, we are planning to add more functions/features.
+
+**Coming soon**
+
 ## Contribution
 We know that things are never perfect. If you find an issue or if you have a suggestion to improve, feel free to open a pull request and i'll take a look at it quickly.
 ## Authors
