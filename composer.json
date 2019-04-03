@@ -1,0 +1,24 @@
+{
+    "name": "illuxat/library",
+    "description": "A library for Illuxat.com.",
+    "keywords": ["illuxat", "xat", "api"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SLOom/Clément",
+            "email": "admin@illuxat.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=7.1"
+    },
+    "require-dev": {
+		"phpunit/phpunit": "6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Illuxat\\": "src/"
+        }
+    }
+}
