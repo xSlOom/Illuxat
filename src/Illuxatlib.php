@@ -32,9 +32,22 @@ class Illuxatlib
     /**
      * Main domain for Illuxat
      *
-     * @var string $_illuxat_dom
+     * @var string $illuxatdom
      */
     private static $illuxatdom = 'https://api.illuxat.com/';
+
+    /**
+     * Array of options for GetList
+     *
+     * @var array $optionArray
+     */
+    private static $optionArray = [
+        'stats',
+        'powers',
+        'smilies',
+        'hugs',
+        'all'
+    ];
 
     /**
      * Get the informations of a power
@@ -50,7 +63,7 @@ class Illuxatlib
         }
 
         $content = self::getContent(
-            self::$illuxatdom . 'powerApi?power=' . $powerName
+            self::$illuxatdom . 'power/' . $powerName
         );
 
         if (empty($content['response'])) {
@@ -74,6 +87,72 @@ class Illuxatlib
     public static function getLatest(): ?array
     {
         $content = self::getContent(self::$illuxatdom . 'latestpower');
+
+        if (empty($content['response'])) {
+            throw new \Exception("Error Processing Request");
+        }
+
+        $content = json_decode($content['response'], true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON.');
+        }
+
+        return $content;
+    }
+
+    /**
+     * Get the informations of a xat chat
+     *
+     * @param string $roomName Name of the chat
+     *
+     * @return mixed
+     */
+    public static function getChatInfos(string $roomName): ?array
+    {
+        if (empty($roomName) || strlen($roomName) == 0) {
+            throw new \Exception('You must specify a room name');
+        }
+
+        $content = self::getContent(
+            self::$illuxatdom . 'room/' . $roomName
+        );
+
+        if (empty($content['response'])) {
+            throw new \Exception("Error Processing Request");
+        }
+
+        $content = json_decode($content['response'], true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON.');
+        }
+
+        return $content;
+    }
+
+    /**
+     * Get a content depending of the option
+     *
+     * @param string $option
+     *
+     * @return mixed
+     */
+    public static function getData(string $option): ?array
+    {
+        if (empty($option) || strlen($option) == 0) {
+            throw new \Exception('You must specify an option');
+        }
+
+        if (!in_array($option, self::$optionArray)) {
+            throw new \Exception(
+                'Invalid option. Available options: ' . implode(', ', self::$optionArray)
+            );
+        }
+
+        $content = self::getContent(
+            self::$illuxatdom . 'getList/' . $option
+        );
 
         if (empty($content['response'])) {
             throw new \Exception("Error Processing Request");
