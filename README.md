@@ -11,6 +11,9 @@
 A PHP library for Illuxat.com. The goal of this repository is to give the ability for developers to use our apis properly and easier.
 <br><br>
 Our apis are mainly related to [xat](https://xat.com). If you don't know what's xat; then xat is a fun social networking site with the coolest online chat box.
+## Requirements
+- PHP 7.2
+- Composer
 ## Getting Started
 To get started, you need to install it and you have 2 choices on install it.
 
