@@ -1,4 +1,4 @@
-# Illuxat
+# Illuxat 🚀
 
 <p align="center">
   
@@ -35,9 +35,9 @@ Here is an example of use:
 ```
 require_once 'vendor/autoload.php'; 
 
-use Illuxat\Illuxatlib;
+use Illuxat\Illuxatlib as xat;
 
-$latest = Illuxatlib::getLatest();
+$latest = xat::getLatest();
 
 print_r($latest);
 ```
