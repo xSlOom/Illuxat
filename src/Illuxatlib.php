@@ -54,12 +54,16 @@ class Illuxatlib
      *
      * @param string $powerName Name of a xat power
      *
+     * @throws Exception If argument $powerName is empty
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
+     *
      * @return array
      */
     public static function powerInfo(string $powerName): array
     {
         if (empty($powerName) || strlen($powerName) == 0) {
-            throw new \Exception('You must specify a power');
+            throw new \EmptyArgument('You must specify a power');
         }
 
         $content = self::getContent(
@@ -81,6 +85,9 @@ class Illuxatlib
 
     /**
      * Get the informations of the latest power
+     *
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
      *
      * @return mixed
      */
@@ -105,6 +112,10 @@ class Illuxatlib
      * Get the informations of a xat chat
      *
      * @param string $roomName Name of the chat
+     *
+     * @throws Exception If argument $roomName is empty
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
      *
      * @return mixed
      */
@@ -135,6 +146,10 @@ class Illuxatlib
      * Get a content depending of the option
      *
      * @param string $option
+     *
+     * @throws Exception If argument $option is empty
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
      *
      * @return mixed
      */
@@ -171,6 +186,8 @@ class Illuxatlib
      *  Get content of a URL
      *
      * @param string $url Url to fetch content
+     *
+     * @throws Exception If argument $url is empty
      *
      * @return mixed
      */
