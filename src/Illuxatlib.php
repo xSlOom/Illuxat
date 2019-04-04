@@ -278,6 +278,7 @@ class Illuxatlib
             $arrData = "";
             foreach ($data as $key => $value) {
                 $arrData .= $key . '=' . $value . ($i < sizeof($data) ? '&' : '');
+                $i++;
             }
 
             curl_setopt($curlInit, CURLOPT_POST, 1);
