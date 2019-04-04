@@ -183,6 +183,40 @@ class Illuxatlib
     }
 
     /**
+     * Get the connection information of a xat chat.
+     *
+     * @param int $roomID
+     *
+     * @throws Exception If argument $option is empty
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
+     *
+     * @return mixed
+     */
+    public static function getChatConnection(int $roomID): ?array
+    {
+        if (empty($roomID) || strlen($roomID) == 0 || !is_numeric($roomID)) {
+            throw new \Exception('You must specify a numeric roomid');
+        }
+
+        $content = self::getContent(
+            self::$illuxatdom . 'connection/' . $roomID
+        );
+
+        if (empty($content['response'])) {
+            throw new \Exception("Error Processing Request");
+        }
+
+        $content = json_decode($content['response'], true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON.');
+        }
+
+        return $content;
+    }
+
+    /**
      *  Get content of a URL
      *
      * @param string $url Url to fetch content
