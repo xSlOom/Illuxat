@@ -1,4 +1,13 @@
 # Illuxat
+
+<p align="center">
+  
+[![Build Status](https://travis-ci.com/xSlOom/Illuxat.svg?branch=master)](https://travis-ci.com/xSlOom/Illuxat)
+[![Latest Stable Version](https://poser.pugx.org/xsloom/illuxat/v/stable)](https://packagist.org/packages/xsloom/illuxat)
+[![License](https://poser.pugx.org/xsloom/illuxat/license)](https://packagist.org/packages/xsloom/illuxat)
+
+</p>
+
 A PHP library for Illuxat.com. The goal of this repository is to give the ability for developers to use our apis properly and easier.
 <br><br>
 Our apis are mainly related to [xat](https://xat.com). If you don't know what's xat; then xat is a fun social networking site with the coolest online chat box.
