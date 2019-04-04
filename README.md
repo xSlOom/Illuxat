@@ -2,7 +2,7 @@
 
 <p align="center">
   
-[![Build Status](https://travis-ci.com/xSlOom/Illuxat.svg?branch=master)](https://travis-ci.com/xSlOom/Illuxat)
+[![Build Status](https://travis-ci.org/xSlOom/Illuxat.svg?branch=master)](https://travis-ci.org/xSlOom/Illuxat)
 [![Latest Stable Version](https://poser.pugx.org/xsloom/illuxat/v/stable)](https://packagist.org/packages/xsloom/illuxat)
 [![License](https://poser.pugx.org/xsloom/illuxat/license)](https://packagist.org/packages/xsloom/illuxat)
 
