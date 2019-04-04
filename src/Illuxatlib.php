@@ -217,15 +217,54 @@ class Illuxatlib
     }
 
     /**
-     *  Get content of a URL
+     * Get the price of a shortname
+     *
+     * @param string $shortname
+     *
+     * @throws Exception If argument $shortname is empty
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
+     *
+     * @return mixed
+     */
+    public static function getShortname(string $shortname): ?array
+    {
+        if (empty($shortname) || strlen($shortname) == 0) {
+            throw new \Exception('You must specify a shortname');
+        }
+
+        $content = self::getContent(
+            self::$illuxatdom . 'shortname',
+            [
+                'shortname' => $shortname
+            ]
+        );
+
+        if (empty($content['response'])) {
+            throw new \Exception("Error Processing Request");
+        }
+
+        $content = json_decode($content['response'], true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON.');
+        }
+
+        return $content;
+    }
+
+    /**
+     * Get content of a URL
      *
      * @param string $url Url to fetch content
+     *
+     * @param array $data (optional)
      *
      * @throws Exception If argument $url is empty
      *
      * @return mixed
      */
-    private function getContent(string $url): ?array
+    private function getContent(string $url, array $data = []): ?array
     {
         if (empty($url) || strlen($url) == 0) {
             throw new \Exception('You must specify a url');
@@ -233,6 +272,18 @@ class Illuxatlib
 
         $curlInit = curl_init();
         curl_setopt($curlInit, CURLOPT_URL, $url);
+
+        if (!empty($data)) {
+            $i = 0;
+            $arrData = "";
+            foreach ($data as $key => $value) {
+                $arrData .= $key . '=' . $value . ($i < sizeof($data) ? '&' : '');
+            }
+
+            curl_setopt($curlInit, CURLOPT_POST, 1);
+            curl_setopt($curlInit, CURLOPT_POSTFIELDS, $arrData);
+        }
+
         curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($curlInit);
         curl_close($curlInit);
