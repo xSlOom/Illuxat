@@ -287,6 +287,8 @@ class Illuxatlib
      * @throws Exception If argument $languageCode is not in $langArray
      * @throws Exception If response is empty
      * @throws Exception If invalid json on URL response
+     *
+     * @return mixed
      */
     public static function getPromotedChats(string $languageCode): ?array
     {
