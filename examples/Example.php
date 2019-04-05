@@ -21,3 +21,18 @@ $shortname = xat::getShortname('sloom2');
 $price = $shortname['error'] ? 'error:' : 'price:';
 
 echo "Shortname {$price} {$shortname['message']}.";
+
+/**
+ * Fetch promoted chats by a language code
+ */
+
+$lang = 'pt';
+$promoted = xat::getPromotedChats($lang);
+
+if ($promoted['error'] == true) {
+    return print $promoted['message'];
+}
+
+foreach ($promoted['message'] as $chatID => $data) {
+    echo "Chat ID: {$chatID} - Promoted for: {$data['time']}.\n";
+}

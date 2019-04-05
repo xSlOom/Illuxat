@@ -50,6 +50,30 @@ class Illuxatlib
     ];
 
     /**
+     * Array of languages
+     *
+     * @var array $langArray
+     */
+    private static $langArray = [
+        'en',
+        'fr',
+        'es',
+        'pt',
+        'ar',
+        'n0',
+        'ro',
+        'it',
+        'de',
+        'th',
+        'tr',
+        'pl',
+        'nl',
+        'hr',
+        'sr',
+        'bs'
+    ];
+
+    /**
      * Get the informations of a power
      *
      * @param string $powerName Name of a xat power
@@ -148,6 +172,7 @@ class Illuxatlib
      * @param string $option
      *
      * @throws Exception If argument $option is empty
+     * @throws Exception If argument $option is not in $optionArray
      * @throws Exception If response is empty
      * @throws Exception If invalid json on URL response
      *
@@ -238,6 +263,45 @@ class Illuxatlib
             [
                 'shortname' => $shortname
             ]
+        );
+
+        if (empty($content['response'])) {
+            throw new \Exception("Error Processing Request");
+        }
+
+        $content = json_decode($content['response'], true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON.');
+        }
+
+        return $content;
+    }
+
+    /**
+     * Get the promoted list from a language code
+     *
+     * @param string $languageCode
+     *
+     * @throws Exception If argument $languageCode is empty
+     * @throws Exception If argument $languageCode is not in $langArray
+     * @throws Exception If response is empty
+     * @throws Exception If invalid json on URL response
+     */
+    public static function getPromotedChats(string $languageCode): ?array
+    {
+        if (empty($languageCode) || strlen($languageCode) == 0) {
+            throw new \Exception('You must specify a language code');
+        }
+
+        if (!in_array($languageCode, self::$langArray)) {
+            throw new \Exception(
+                'Invalid language code. Available languages: ' . implode(', ', self::$langArray)
+            );
+        }
+
+        $content = self::getContent(
+            self::$illuxatdom . 'promoted/' . $languageCode
         );
 
         if (empty($content['response'])) {
